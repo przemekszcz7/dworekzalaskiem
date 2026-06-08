@@ -1,0 +1,6 @@
+{
+  "name": "Dworek Za Laskiem",
+  "description": "Luksusowy dworek i sala bankietowa Dworek Za Laskiem oferujący najwyższej jakości catering, wesela, uroczystości okolicznościowe i eventy firmowe.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dworek Za Laskiem – Wyjątkowe Miejsce na Uroczyste Chwile</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="https://i.ibb.co/60vKdpm8/546135845-122099726601012521-278272616330634572-n.jpg">
+  
+  <!-- Font Awesome 6 for CDNs -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Cormorant Garamond & EB Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Custom Properties for Luxury Theme */
+    :root {
+      --bg-ivory: #FDFAF5;
+      --bg-ivory-warm: #FAF6EE;
+      --gold: #C9A84C;
+      --gold-deep: #8B6914;
+      --gold-light: #F0D98C;
+      --text-dark: #2C2218;
+      --warm-gray: #E8E0D0;
+      --white: #FFFFFF;
+      --shadow-gold: 0 8px 40px rgba(180, 140, 60, 0.12);
+      --shadow-gold-hover: 0 12px 48px rgba(180, 140, 60, 0.22);
+    }
+
+    /* Base Styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-ivory);
+      color: var(--text-dark);
+      font-family: 'EB Garamond', serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-ivory);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--gold);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gold-deep);
+    }
+
+    /* Section & Container Setup with Editorial White Space */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 9rem 0;
+      position: relative;
+    }
+
+    /* Subtle parchment linen texture overlays */
+    .parchment-texture {
+      background-image: 
+        repeating-linear-gradient(2deg, rgba(232, 224, 208, 0.04) 0px, rgba(232, 224, 208, 0.04) 1px, transparent 1px, transparent 12px),
+        repeating-linear-gradient(88deg, rgba(232, 224, 208, 0.04) 0px, rgba(232, 224, 208, 0.04) 1px, transparent 1px, transparent 12px);
+    }
+
+    /* Typography Settings */
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+
+    a {
+      transition: all 0.3s ease;
+    }
+
+    /* Gold Ornamental Line Divider with SVG flourish */
+    .ornamental-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2.5rem auto;
+      width: 100%;
+      max-width: 400px;
+    }
+    
+    .ornamental-divider::before,
+    .ornamental-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to var(--direction, right), transparent 10%, var(--gold) 80%, var(--gold-light) 100%);
+    }
+
+    .ornamental-divider::after {
+      --direction: left;
+    }
+
+    .ornamental-divider span {
+      margin: 0 1.2rem;
+      color: var(--gold-deep);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      opacity: 0.85;
+    }
+
+    /* Scroll Reveal Animation Styles (IntersectionObserver) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(45px);
+      transition: opacity 1.2s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* HEADER AND FIXED NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      background: rgba(253, 250, 245, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+      z-index: 1000;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    nav.scrolled {
+      height: 75px;
+      box-shadow: 0 4px 30px rgba(44, 34, 24, 0.05);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.35);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1350px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    /* Logo Styling */
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.6rem;
+      color: var(--gold-deep);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.3s ease;
+    }
+
+    .logo:hover {
+      opacity: 0.8;
+    }
+
+    .logo-ornament {
+      font-size: 1rem;
+      color: var(--gold);
+    }
+
+    /* Nav Links Styling */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-family: 'EB Garamond', serif;
+      text-decoration: none;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background-color: var(--gold);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover {
+      color: var(--gold-deep);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--gold-deep);
+      font-weight: 500;
+    }
+
+    /* Mobile Menu Hamburger Trigger */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 25px;
+      height: 18px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 1100;
+    }
+
+    .menu-toggle span {
+      width: 100%;
+      height: 1.5px;
+      background-color: var(--text-dark);
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Active Hamburger to X transition */
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+      background-color: var(--gold-deep);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+      background-color: var(--gold-deep);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-image: 
+        linear-gradient(to bottom, rgba(253,250,245,0.15) 0%, rgba(44,34,24,0.52) 100%),
+        url("https://i.ibb.co/TD7hspgB/617808752-122120776845012521-5423361083559297449-n.jpg");
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      color: var(--white);
+      padding-top: 90px;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      padding: 0 2rem;
+      z-index: 20;
+    }
+
+    .hero-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+      display: block;
+      opacity: 0.95;
+    }
+
+    /* Gold Leaf Shimmer CSS Animation Title */
+    .hero-title {
+      font-size: calc(3.2rem + 3.5vw);
+      line-height: 1.1;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
+      display: inline-block;
+      
+      /* Gold shimmer gradient base */
+      background: linear-gradient(
+        90deg,
+        #FFFFFF 0%,
+        #FFFFFF 30%,
+        var(--gold-light) 45%,
+        #FFEEC2 50%,
+        var(--gold-light) 55%,
+        #FFFFFF 70%,
+        #FFFFFF 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldLeafShimmer 5.5s infinite linear;
+    }
+
+    @keyframes goldLeafShimmer {
+      0% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: calc(1.1rem + 0.5vw);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2.2rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-divider {
+      width: 80px;
+      height: 1.5px;
+      background: var(--gold);
+      margin: 0 auto 2.5rem auto;
+      border-radius: 20px;
+    }
+
+    /* Outlined Gold Button */
+    .btn-gold-outline {
+      display: inline-block;
+      font-family: 'EB Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background-color: transparent;
+      border: 1.5px solid var(--gold);
+      padding: 1.2rem 3rem;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 0px;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .btn-gold-outline:hover {
+      background-color: var(--gold);
+      color: var(--text-dark);
+      box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Floating Petals Y-axis oscillation */
+    .petal-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .petal {
+      position: absolute;
+      background: radial-gradient(circle at 35% 35%, #ffffff, #faf0e6 60%, rgba(201, 168, 76, 0.15) 100%);
+      border-radius: 50% 0 50% 50% / 50% 0 50% 50%;
+      transform-origin: center;
+      opacity: 0.65;
+      animation: floatPetal 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatPetal {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.9);
+      }
+      50% {
+        transform: translateY(-20px) translateX(15px) rotate(15deg) scale(1);
+      }
+      100% {
+        transform: translateY(-40px) translateX(-10px) rotate(35deg) scale(0.95);
+      }
+    }
+
+    /* SECTION HEADER STYLING */
+    .section-header {
+      text-align: center;
+      margin-bottom: 5.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 3.2rem;
+      font-style: italic;
+      color: var(--gold-deep);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.9rem;
+      color: rgba(44, 34, 24, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+    }
+
+    /* O NAS SECTION (Two Column) */
+    .two-column-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5.5rem;
+      align-items: center;
+    }
+
+    /* Gold Offset Frame */
+    .image-container-offset {
+      position: relative;
+      width: 100%;
+    }
+
+    .image-container-offset img {
+      width: 100%;
+      display: block;
+      border-radius: 2px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 10px 35px rgba(44, 34, 24, 0.15);
+    }
+
+    .image-container-offset::after {
+      content: "";
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: -20px;
+      bottom: -20px;
+      border: 1px solid var(--gold);
+      z-index: 1;
+      pointer-events: none;
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .image-container-offset:hover::after {
+      top: 10px;
+      left: 10px;
+      right: -10px;
+      bottom: -10px;
+      border-color: var(--gold-light);
+    }
+
+    /* Text Description Side */
+    .text-content-side h3 {
+      font-size: 2.5rem;
+      color: var(--gold-deep);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .text-content-side p {
+      font-size: 1.15rem;
+      color: var(--text-dark);
+      margin-bottom: 2rem;
+      text-align: justify;
+      line-height: 1.85;
+    }
+
+    /* Stat Pills Badge row */
+    .stat-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--white);
+      border: 1px solid var(--warm-gray);
+      border-radius: 50px;
+      padding: 0.8rem 1.6rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--gold-deep);
+      box-shadow: var(--shadow-gold);
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .stat-pill:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      box-shadow: var(--shadow-gold-hover);
+    }
+
+    .stat-pill i {
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    /* GALERIA SECTION */
+    .galeria-section {
+      background-color: var(--bg-ivory-warm);
+    }
+
+    /* Masonry CSS Grid columns style */
+    .gallery-masonry-wrapper {
+      column-count: 3;
+      column-gap: 1.8rem;
+      width: 100%;
+    }
+
+    .gallery-masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1.8rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      cursor: pointer;
+      box-shadow: var(--shadow-gold);
+      background-color: var(--white);
+    }
+
+    .gallery-masonry-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gallery-masonry-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .gallery-card-hover-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(44, 34, 24, 0.45);
+      opacity: 0;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+
+    .gallery-masonry-item:hover .gallery-card-hover-overlay {
+      opacity: 1;
+    }
+
+    .gallery-card-hover-overlay i {
+      color: var(--ivory);
+      font-size: 1.6rem;
+      transform: scale(0.85);
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-masonry-item:hover .gallery-card-hover-overlay i {
+      transform: scale(1);
+    }
+
+    /* LIGHTBOX CSS SYSTEM */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(44, 34, 24, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      color: var(--ivory);
+      font-size: 3.5rem;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      transition: color 0.3s ease;
+      z-index: 2010;
+    }
+
+    .lightbox-close:hover {
+      color: var(--gold);
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85vh;
+      border: 3px solid var(--gold-light);
+      box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+      border-radius: 2px;
+      transform: scale(0.92);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .lightbox.active .lightbox-content {
+      transform: scale(1);
+    }
+
+    /* OFERTA SECTION */
+    .offer-flex-grid {
+      display: flex;
+      gap: 2.22rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .offer-card {
+      flex: 1;
+      min-width: 320px;
+      max-width: 365px;
+      background-color: var(--white);
+      border-top: 4px solid var(--gold);
+      border-radius: 4px;
+      padding: 4rem 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-gold);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-gold-hover);
+    }
+
+    .offer-card-icon {
+      font-size: 2.6rem;
+      color: var(--gold-deep);
+      margin-bottom: 1.8rem;
+    }
+
+    .offer-card-title {
+      font-size: 1.85rem;
+      font-style: italic;
+      color: var(--text-dark);
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+    }
+
+    .offer-card-desc {
+      font-size: 1.05rem;
+      color: rgba(44, 34, 24, 0.75);
+      line-height: 1.75;
+    }
+
+    /* REVIEWS OPINIE SECTION */
+    .opinie-section {
+      background-color: var(--bg-ivory-warm);
+      overflow: hidden;
+    }
+
+    .opinie-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 100 100'%3E%3Cpath d='M50,33 C53,23 57,23 60,33 C68,34 68,42 60,43 C65,51 58,55 55,48 C54,56 46,56 45,48 C42,55 35,51 40,43 C32,42 32,34 40,33 C43,23 47,23 50,33 Z' fill='%23c9a84c' fill-opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .quote-card {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      margin: 0 auto 3.5rem auto;
+      background-color: var(--white);
+      padding: 5rem 4rem;
+      border-radius: 4px;
+      box-shadow: var(--shadow-gold);
+      text-align: center;
+    }
+
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      color: rgba(201, 168, 76, 0.16);
+      height: 70px;
+      line-height: 1;
+      display: block;
+      margin-top: -2rem;
+      margin-bottom: -1rem;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.75rem;
+      color: var(--text-dark);
+      line-height: 1.65;
+      margin-bottom: 2.5rem;
+    }
+
+    .quote-author {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold-deep);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .gold-stars {
+      color: var(--gold);
+      font-size: 1.1rem;
+      letter-spacing: 0.25em;
+    }
+
+    .reviews-cta-container {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* KONTAKT SECTION (Two Column with Offset frame image) */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .contact-info-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-sub {
+      font-size: 1.35rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--gold-deep);
+      margin-bottom: 2rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 3.5rem;
+    }
+
+    .contact-list-item {
+      border-left: 2px solid var(--gold);
+      padding-left: 2rem;
+      margin-bottom: 1.8rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .contact-list-item:hover {
+      border-color: var(--gold-deep);
+    }
+
+    .contact-label {
+      display: block;
+      font-family: 'EB Garamond', serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gold-deep);
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 300;
+    }
+
+    a.contact-value:hover {
+      color: var(--gold);
+    }
+
+    /* Facebook pill button with Font Awesome logo */
+    .btn-facebook-luxury {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background-color: var(--gold);
+      color: var(--white);
+      text-decoration: none;
+      padding: 1.2rem 2.5rem;
+      border-radius: 50px;
+      font-family: 'EB Garamond', serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      box-shadow: 0 6px 20px rgba(201, 168, 76, 0.25);
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .btn-facebook-luxury:hover {
+      background-color: var(--gold-deep);
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(201, 168, 76, 0.38);
+    }
+
+    .btn-facebook-luxury i {
+      font-size: 1.15rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #241A11; /* Extremely rich darker espresso */
+      color: var(--bg-ivory);
+      padding: 6rem 0 3.5rem 0;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 2.3rem;
+      font-style: italic;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-divider {
+      width: 50px;
+      height: 1px;
+      background: rgba(240, 217, 140, 0.35);
+      margin: 1.2rem auto;
+    }
+
+    .footer-links-row {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin: 2.2rem 0;
+    }
+
+    .footer-link-item {
+      color: rgba(253, 250, 245, 0.65);
+      text-decoration: none;
+      font-size: 0.83rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .footer-link-item:hover {
+      color: var(--gold-light);
+    }
+
+    .footer-meta-text {
+      font-size: 0.8rem;
+      color: rgba(253, 255, 255, 0.42);
+      letter-spacing: 0.08em;
+      line-height: 1.8;
+    }
+
+    /* RESPONSIVE BREAKPOINTS (Desktop-First Precision) */
+    @media (max-width: 1024px) {
+      nav {
+        height: 80px;
+      }
+      section {
+        padding: 7rem 0;
+      }
+      .two-column-layout {
+        gap: 4rem;
+      }
+      .gallery-masonry-wrapper {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .two-column-layout, .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 4.5rem;
+      }
+      .text-content-side {
+        order: -1; /* Place text first */
+      }
+      .contact-info-block {
+        order: -1;
+      }
+      .image-container-offset {
+        max-width: 650px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      /* Mobile Navigation drawer */
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: var(--bg-ivory);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        z-index: 999;
+        pointer-events: none;
+        border-top: 1px solid rgba(201, 168, 76, 0.15);
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-link {
+        font-size: 1.05rem;
+        letter-spacing: 0.2em;
+      }
+
+      .hero-title {
+        font-size: 2.8rem;
+      }
+
+      .section-header h2 {
+        font-size: 2.6rem;
+      }
+
+      .gallery-masonry-wrapper {
+        column-count: 1;
+        gap: 1.2rem;
+      }
+
+      .quote-card {
+        padding: 4.5rem 2rem 3rem 2rem;
+      }
+
+      .quote-text {
+        font-size: 1.45rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      section {
+        padding: 5.5rem 0;
+      }
+      .nav-container {
+        padding: 0 1.5rem;
+      }
+      .logo {
+        font-size: 1.35rem;
+      }
+      .btn-gold-outline {
+        padding: 1rem 2.2rem;
+        font-size: 0.78rem;
+      }
+      .stat-pill {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body class="parchment-texture">
+
+  <!-- NAVIGATION -->
+  <nav id="main-nav">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <span class="logo-ornament">❀</span> Dworek Za Laskiem <span class="logo-ornament">❀</span>
+      </a>
+      
+      <!-- Hamburger Toggle -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Otwórz menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Menu Links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#o-nas" class="nav-link">O Nas</a></li>
+        <li><a href="#galeria" class="nav-link">Galeria</a></li>
+        <li><a href="#oferta" class="nav-link">Oferta</a></li>
+        <li><a href="#opinie" class="nav-link">Opinie</a></li>
+        <li><a href="#kontakt" class="nav-link">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="hero" id="home">
+    <!-- Floating Petals decorative layer -->
+    <div class="petal-wrapper">
+      <div class="petal" style="top: 12%; left: 8%; width: 14px; height: 18px; animation-duration: 7s; animation-delay: 0s;"></div>
+      <div class="petal" style="top: 32%; left: 80%; width: 18px; height: 23px; animation-duration: 11s; animation-delay: 2s;"></div>
+      <div class="petal" style="top: 60%; left: 15%; width: 15px; height: 19px; animation-duration: 9s; animation-delay: 1s;"></div>
+      <div class="petal" style="top: 48%; left: 88%; width: 16px; height: 21px; animation-duration: 10s; animation-delay: 3s;"></div>
+      <div class="petal" style="top: 75%; left: 74%; width: 17px; height: 22px; animation-duration: 12s; animation-delay: 0.5s;"></div>
+      <div class="petal" style="top: 22%; left: 70%; width: 13px; height: 16px; animation-duration: 8s; animation-delay: 4.5s;"></div>
+    </div>
+
+    <div class="hero-content">
+      <span class="hero-label">Witamy w</span>
+      <h1 class="hero-title">Dworek Za Laskiem</h1>
+      <p class="hero-subtitle">Wyjątkowe miejsce na niezapomniane chwile</p>
+      <div class="hero-divider"></div>
+      <a href="#kontakt" class="btn-gold-outline">Zarezerwuj termin</a>
+    </div>
+  </header>
+
+  <!-- O NAS SECTION -->
+  <section id="o-nas">
+    <div class="container reveal">
+      <div class="two-column-layout">
+        
+        <!-- Left Image with Gold Frame -->
+        <div class="image-container-offset">
+          <img src="https://i.ibb.co/DDrCFqDB/545367801-122099747955012521-4037793957860652932-n.jpg" alt="Dworek Za Laskiem - Posiadłość i Ogród">
+        </div>
+
+        <!-- Right Text Description -->
+        <div class="text-content-side">
+          <div class="ornamental-divider" style="margin-left: 0; max-width: 320px; margin-bottom: 2rem;">
+            <span>❀ O Nas ❀</span>
+          </div>
+          <h3>Tradycja połączona z nowoczesną elegancją</h3>
+          <p>
+            Dworek Za Laskiem to urokliwa, rodzinna posiadłość położona w malowniczym sąsiedztwie lasu, stworzona z myślą o organizacji najważniejszych uroczystości w Państwa życiu. To wyjątkowe miejsce, w którym tradycyjna polska gościnność łączy się z elegancją francuskiego château, tworząc niepowtarzalny, romantyczny klimat. Specjalizujemy się w kompleksowej organizacji wesel, chrzcin, komunii, jubileuszy oraz spotkań firmowych, oferując przy tym wykwintny catering dopasowany do indywidualnych życzeń. Z pasją dbamy o każdy detal, by każda spędzona u nas chwila była pełna magii i pozostawiła najpiękniejsze wspomnienia.
+          </p>
+          
+          <!-- Quality badging pills -->
+          <div class="stat-pills-row">
+            <div class="stat-pill">
+              <i class="fa-solid fa-utensils"></i> <span>Catering</span>
+            </div>
+            <div class="stat-pill">
+              <i class="fa-solid fa-leaf"></i> <span>Eventy</span>
+            </div>
+            <div class="stat-pill">
+              <i class="fa-solid fa-cake-candles"></i> <span>Uroczystości</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA SECTION -->
+  <section id="galeria" class="galeria-section">
+    <div class="container reveal">
+      
+      <div class="section-header">
+        <div class="ornamental-divider" style="margin-bottom: 1.5rem;">
+          <span>❀ Galeria ❀</span>
+        </div>
+        <p>Zobacz nasze urokliwe wnętrza i przyjęcia</p>
+      </div>
+
+      <!-- Masonry Grid Architecture -->
+      <div class="gallery-masonry-wrapper">
+        
+        <!-- Photo 1 -->
+        <div class="gallery-masonry-item" onclick="openLightbox('https://i.ibb.co/B2VwpB3C/583105775-122113681581012521-3182675787079111342-n.jpg')">
+          <img src="https://i.ibb.co/B2VwpB3C/583105775-122113681581012521-3182675787079111342-n.jpg" alt="Dworek Za Laskiem przyjęcie cateringowe">
+          <div class="gallery-card-hover-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+
+        <!-- Photo 2 -->
+        <div class="gallery-masonry-item" onclick="openLightbox('https://i.ibb.co/7Pbskjn/616322924-122120777253012521-5477643842902413246-n.jpg')">
+          <img src="https://i.ibb.co/7Pbskjn/616322924-122120777253012521-5477643842902413246-n.jpg" alt="Dworek Za Laskiem dekoracje i elegancja">
+          <div class="gallery-card-hover-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+
+        <!-- Photo 3 -->
+        <div class="gallery-masonry-item" onclick="openLightbox('https://i.ibb.co/Y41HwQ7W/617480315-122120777259012521-8089063307950455398-n.jpg')">
+          <img src="https://i.ibb.co/Y41HwQ7W/617480315-122120777259012521-8089063307950455398-n.jpg" alt="Dworek Za Laskiem luksusowe wesela">
+          <div class="gallery-card-hover-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+
+        <!-- Photo 4 -->
+        <div class="gallery-masonry-item" onclick="openLightbox('https://i.ibb.co/N2KfJV2J/616264332-122120777277012521-1258229431451133906-n.jpg')">
+          <img src="https://i.ibb.co/N2KfJV2J/616264332-122120777277012521-1258229431451133906-n.jpg" alt="Dworek Za Laskiem wnętrza i stoły">
+          <div class="gallery-card-hover-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+
+        <!-- Photo 5 -->
+        <div class="gallery-masonry-item" onclick="openLightbox('https://i.ibb.co/DDrCFqDB/545367801-122099747955012521-4037793957860652932-n.jpg')">
+          <img src="https://i.ibb.co/DDrCFqDB/545367801-122099747955012521-4037793957860652932-n.jpg" alt="Dworek Za Laskiem podwórze i widok z lotu ptaka">
+          <div class="gallery-card-hover-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+
+        <!-- Photo 6 -->
+        <div class="gallery-masonry-item" onclick="openLightbox('https://i.ibb.co/TD7hspgB/617808752-122120776845012521-5423361083559297449-n.jpg')">
+          <img src="https://i.ibb.co/TD7hspgB/617808752-122120776845012521-5423361083559297449-n.jpg" alt="Dworek Za Laskiem salka oświetlenie">
+          <div class="gallery-card-hover-overlay">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX MODAL CONTAINER -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" id="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img src="" alt="Fullscreen image viewing" class="lightbox-content" id="lightbox-img" onclick="event.stopPropagation()">
+  </div>
+
+  <!-- OFERTA SECTION -->
+  <section id="oferta">
+    <div class="container reveal">
+      
+      <div class="section-header">
+        <div class="ornamental-divider" style="margin-bottom: 1.5rem;">
+          <span>❀ Nasza Oferta ❀</span>
+        </div>
+        <p>Dedykowane pakiety na każdą okazję</p>
+      </div>
+
+      <!-- Flex card grid -->
+      <div class="offer-flex-grid">
+        
+        <!-- Service Card 1 -->
+        <div class="offer-card">
+          <div class="offer-card-icon"><i class="fa-solid fa-utensils"></i></div>
+          <h3 class="offer-card-title">Catering</h3>
+          <p class="offer-card-desc">
+            Wykwintne menu skomponowane ze świeżych, lokalnych produktów najwyższej jakości. Dostarczamy niezapomniane kulinarne doznania zarówno na kameralne spotkania w gronie przyjaciół, jak i huczne bankiety.
+          </p>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="offer-card">
+          <div class="offer-card-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+          <h3 class="offer-card-title">Wesela i Uroczystości</h3>
+          <p class="offer-card-desc">
+            Wymarzone wesela, chrzciny, komunie oraz jubileusze w otoczeniu romantycznego dworku. Oferujemy kompleksową organizację, autorskie dekoracje oraz dbałość o każdy szczegół Twojego wielkiego dnia.
+          </p>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="offer-card">
+          <div class="offer-card-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <h3 class="offer-card-title">Eventy Firmowe</h3>
+          <p class="offer-card-desc">
+            Profesjonalne bankiety, konferencje oraz spotkania integracyjne. Eleganckie wnętrza, doskonałe zaplecze multimedialne i dyskretna obsługa gwarantują budowę wyjątkowego wizerunku Państwa firmy.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OPINIE REVIEWS SECTION -->
+  <section id="opinie" class="opinie-section">
+    <div class="container reveal">
+      
+      <div class="section-header">
+        <div class="ornamental-divider" style="margin-bottom: 1.5rem;">
+          <span>❀ Opinie Gości ❀</span>
+        </div>
+        <p>Co mówią o nas nasi klienci</p>
+      </div>
+
+      <!-- Elegant Single Review Card -->
+      <div class="quote-card">
+        <span class="quote-mark">“</span>
+        <blockquote class="quote-text">
+          Dzisiaj korzystałam z cateringu od Państwa Janikowskich z "Dworku Za Laskiem" i powiem Wam, że było przepysznie, dlatego z całego serca polecam serdecznie.
+        </blockquote>
+        <div class="quote-author">— Zadowolona Gośćini</div>
+        <div class="gold-stars">★★★★★</div>
+      </div>
+
+      <!-- Action Button to Reviews -->
+      <div class="reviews-cta-container">
+        <a href="https://www.facebook.com/profile.php?id=61580375631616&sk=reviews" target="_blank" rel="noopener noreferrer" class="btn-gold-outline">Zobacz więcej opinii</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- KONTAKT SECTION -->
+  <section id="kontakt">
+    <div class="container reveal">
+      <div class="contact-layout">
+        
+        <!-- Contact Information Block -->
+        <div class="contact-info-block">
+          <div class="ornamental-divider" style="margin-left: 0; max-width: 320px; margin-bottom: 2rem;">
+            <span>❀ Kontakt ❀</span>
+          </div>
+          <h3 class="contact-sub">Porozmawiajmy o Państwa uroczystości</h3>
+          
+          <ul class="contact-list">
+            <!-- Location Item -->
+            <li class="contact-list-item">
+              <span class="contact-label">Lokalizacja</span>
+              <div class="contact-value">Okoleniec 62-650</div>
+            </li>
+
+            <!-- Telephone Item -->
+            <li class="contact-list-item">
+              <span class="contact-label">Zadzwoń do nas</span>
+              <a href="tel:691498942" class="contact-value">691 498 942</a>
+            </li>
+
+            <!-- Email Item -->
+            <li class="contact-list-item">
+              <span class="contact-label">Napisz e-mail</span>
+              <a href="mailto:dworekzalaskiem@gmail.com" class="contact-value">dworekzalaskiem@gmail.com</a>
+            </li>
+          </ul>
+
+          <div>
+            <a href="https://www.facebook.com/profile.php?id=61580375631616" target="_blank" rel="noopener noreferrer" class="btn-facebook-luxury">
+              <i class="fa-brands fa-facebook-f"></i> Obserwuj nas na Facebooku
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side Frame Image -->
+        <div class="image-container-offset">
+          <img src="https://i.ibb.co/7Pbskjn/616322924-122120777253012521-5477643842902413246-n.jpg" alt="Dworek Za Laskiem – kandelabr, stół i dekoracje">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo">Dworek Za Laskiem</div>
+      <div class="footer-ornament">❁</div>
+      
+      <div class="footer-links-row">
+        <a href="https://www.facebook.com/profile.php?id=61580375631616" target="_blank" rel="noopener noreferrer" class="footer-link-item">Facebook</a>
+        <a href="#opinie" class="footer-link-item">Opinie</a>
+        <a href="#kontakt" class="footer-link-item">Kontakt</a>
+      </div>
+
+      <div class="footer-divider"></div>
+      
+      <p class="footer-meta-text">
+        © 2026 Dworek Za Laskiem · Okoleniec · Wszelkie prawa zastrzeżone
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // MOBILE NAVIGATION DRAWER SYSTEM
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const links = document.querySelectorAll('.nav-link');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile drawers when click on anchors
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // NAV SCROLL BOX SHADOW TOGGLE
+    window.addEventListener('scroll', () => {
+      const navHeader = document.getElementById('main-nav');
+      if (window.scrollY > 40) {
+        navHeader.classList.add('scrolled');
+      } else {
+        navHeader.classList.remove('scrolled');
+      }
+    });
+
+    // SCROLL REVEAL (IntersectionObserver based)
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target); // Trigger animation once
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    });
+
+    revealElements.forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // LIGHTBOX CONTROLS
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    function openLightbox(imgSrc) {
+      lightboxImg.src = imgSrc;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      setTimeout(() => {
+        lightboxImg.src = '';
+      }, 400); // Clear image after transition out complete
+    }
+
+    // CLOSE LIGHTBOX VIA ESCAPE KEY
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+
+    // HIGHLIGHT NAV-LINKS ACCORDING TO WATERMARK SECTION SCROLL
+    const sections = document.querySelectorAll('section, header');
+    window.addEventListener('scroll', () => {
+      let currentSectionId = 'home';
+      const scrollPosition = window.scrollY + 120;
+
+      sections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.clientHeight;
+        if (scrollPosition >= top && scrollPosition < top + height) {
+          currentSectionId = sec.getAttribute('id');
+        }
+      });
+
+      links.forEach(lk => {
+        lk.classList.remove('active');
+        if (lk.getAttribute('href') === `#${currentSectionId}`) {
+          lk.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
